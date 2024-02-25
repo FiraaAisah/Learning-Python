@@ -1,19 +1,27 @@
-def hitung_uang_kembalian(total_belanja, jumlah_pembayaran):
-    if jumlah_pembayaran < total_belanja:
-        return "Maaf, jumlah pembayaran tidak mencukupi."
+def hitung_kembalian(total_belanja, uang_dibayar):
+    if uang_dibayar < total_belanja:
+        print("Maaf, uang yang dibayar kurang.")
+        return
     
-    uang_kembalian = jumlah_pembayaran - total_belanja
-    return uang_kembalian
+    kembalian = uang_dibayar - total_belanja
+    
+    # Daftar nilai kembalian yang mungkin
+    pecahan_uang = [50000, 20000, 10000, 5000, 2000, 1000, 500, 200, 100, 50, 20, 10, 5, 2, 1]
+    
+    print("Kembalian:")
+    
+    for nilai in pecahan_uang:
+        jumlah_pecahan = kembalian // nilai
+        if jumlah_pecahan > 0:
+            print(f"{nilai} x {jumlah_pecahan}")
+            kembalian %= nilai
+    
+    return kembalian
 
-# Input data belanja
-total_belanja = float(input("Masukkan Total Belanja: "))
-jumlah_pembayaran = float(input("Masukkan Jumlah Pembayaran: "))
+# Contoh penggunaan
+total_belanja = float(input("Total belanja: "))
+uang_dibayar = float(input("Uang yang dibayar: "))
 
-# Hitung uang kembalian
-hasil_kembalian = hitung_uang_kembalian(total_belanja, jumlah_pembayaran)
+sisa_kembalian = hitung_kembalian(total_belanja, uang_dibayar)
 
-# Tampilkan hasil
-if isinstance(hasil_kembalian, str):
-    print(hasil_kembalian)
-else:
-    print("\nUang Kembalian: Rp", hasil_kembalian)
+print(f"Sisa kembalian yang tidak dapat dipecah: {sisa_kembalian}")
